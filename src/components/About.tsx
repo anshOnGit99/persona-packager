@@ -1,133 +1,119 @@
-import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Award, GraduationCap, MapPin, Calendar } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { User, MapPin, Calendar, Award, Target, Heart } from "lucide-react";
+import { personalInfo, achievements } from "@/data/portfolio-data";
 
 const About = () => {
-  const highlights = [
-    {
-      icon: Award,
-      title: "3+ Years Experience",
-      description: "At TCS Innovation Labs"
-    },
-    {
-      icon: GraduationCap,
-      title: "B.Tech Mechanical",
-      description: "SRM Institute - 8.49 CGPA"
-    },
-    {
-      icon: MapPin,
-      title: "Based in Bengaluru",
-      description: "Open to remote work"
-    }
-  ];
-
-  const certifications = [
-    {
-      name: "Microsoft AZ-104",
-      title: "Azure Administrator Associate",
-      year: "2024"
-    },
-    {
-      name: "Microsoft AZ-900",
-      title: "Azure Fundamentals",
-      year: "2022-24"
-    }
-  ];
-
   return (
     <section id="about" className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           {/* Section Header */}
-          <div className="text-center mb-16">
-            <Badge variant="outline" className="mb-4">About Me</Badge>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Passionate About Building 
-              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                {" "}Digital Solutions
-              </span>
+          <div className="text-center mb-16 slide-in-up">
+            <Badge variant="outline" className="mb-4 px-4 py-2">
+              <User className="w-4 h-4 mr-2" />
+              About Me
+            </Badge>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              Get to know me
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Transforming ideas into scalable, user-focused applications with modern web technologies
-            </p>
+            <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full"></div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            {/* Left Column - Story */}
-            <div className="space-y-6">
-              <div>
-                <h3 className="text-xl font-semibold mb-4">My Journey</h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  With over 3 years at <strong>TCS Innovation Labs</strong>, I specialize in designing 
-                  and developing responsive, high-performance web applications. My expertise lies in 
-                  <strong> Angular, TypeScript, and modern JavaScript frameworks</strong>, where I've 
-                  successfully delivered multiple production applications.
-                </p>
-              </div>
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            {/* Personal Info */}
+            <div className="slide-in-left">
+              <Card className="card-hover glass">
+                <CardContent className="p-8">
+                  <h3 className="text-2xl font-semibold mb-6 flex items-center gap-2">
+                    <Heart className="w-6 h-6 text-accent" />
+                    My Story
+                  </h3>
+                  <p className="text-muted-foreground text-lg leading-relaxed mb-6">
+                    {personalInfo.bio}
+                  </p>
+                  
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-3 text-muted-foreground">
+                      <MapPin className="w-5 h-5 text-primary" />
+                      <span>{personalInfo.location}</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-muted-foreground">
+                      <Target className="w-5 h-5 text-primary" />
+                      <span>Software Development & Innovation</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-muted-foreground">
+                      <Calendar className="w-5 h-5 text-primary" />
+                      <span>Available for new opportunities</span>
+                    </div>
+                  </div>
 
-              <div>
-                <h3 className="text-xl font-semibold mb-4">What I Do</h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  I create <strong>interactive drag-and-drop interfaces</strong>, architect complex 
-                  data processing pipelines, and build scalable web applications. My approach focuses on 
-                  <strong> performance optimization, clean code, and exceptional user experiences</strong>.
-                </p>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-semibold mb-4">Beyond Code</h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  I believe in continuous learning and staying updated with the latest technologies. 
-                  I enjoy collaborating with cross-functional teams and contributing to open-source projects.
-                </p>
-              </div>
+                  <div className="mt-8 pt-6 border-t border-border/50">
+                    <p className="text-sm text-muted-foreground italic">
+                      "Code is poetry, and I'm passionate about writing beautiful, functional verses that solve real-world problems."
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
 
-            {/* Right Column - Highlights & Certifications */}
-            <div className="space-y-8">
-              {/* Highlights */}
-              <div className="grid gap-4">
-                {highlights.map((item, index) => (
-                  <Card key={index} className="hover:shadow-md transition-shadow">
-                    <CardContent className="p-4">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
-                          <item.icon className="w-5 h-5 text-primary" />
-                        </div>
-                        <div>
-                          <h4 className="font-semibold">{item.title}</h4>
-                          <p className="text-sm text-muted-foreground">{item.description}</p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-
-              {/* Certifications */}
-              <div>
-                <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                  <Award className="w-5 h-5 text-accent" />
-                  Certifications
-                </h3>
-                <div className="space-y-3">
-                  {certifications.map((cert, index) => (
-                    <Card key={index} className="hover:shadow-md transition-shadow">
-                      <CardContent className="p-4">
-                        <div className="flex items-center justify-between">
-                          <div>
-                            <h4 className="font-semibold text-sm">{cert.name}</h4>
-                            <p className="text-sm text-muted-foreground">{cert.title}</p>
+            {/* Achievements & Stats */}
+            <div className="slide-in-right">
+              <div className="space-y-6">
+                <Card className="card-hover glass">
+                  <CardContent className="p-8">
+                    <h3 className="text-2xl font-semibold mb-6 flex items-center gap-2">
+                      <Award className="w-6 h-6 text-accent" />
+                      Achievements
+                    </h3>
+                    <div className="space-y-4">
+                      {achievements.map((achievement, index) => (
+                        <div 
+                          key={index} 
+                          className="p-4 rounded-lg bg-background/50 border border-border/30 hover:border-primary/30 transition-all duration-300"
+                        >
+                          <div className="flex justify-between items-start mb-2">
+                            <h4 className="font-semibold text-primary">{achievement.title}</h4>
+                            <Badge variant="secondary" className="text-xs">
+                              {achievement.date}
+                            </Badge>
                           </div>
-                          <Badge variant="outline" className="text-xs">
-                            <Calendar className="w-3 h-3 mr-1" />
-                            {cert.year}
-                          </Badge>
+                          <p className="text-sm text-muted-foreground mb-1">
+                            {achievement.organization}
+                          </p>
+                          <p className="text-sm text-muted-foreground">
+                            {achievement.description}
+                          </p>
                         </div>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Quick Stats */}
+                <Card className="card-hover glass">
+                  <CardContent className="p-8">
+                    <h3 className="text-xl font-semibold mb-6">Quick Stats</h3>
+                    <div className="grid grid-cols-2 gap-6">
+                      <div className="text-center">
+                        <div className="text-3xl font-bold text-primary mb-2">1+</div>
+                        <div className="text-sm text-muted-foreground">Years Experience</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-3xl font-bold text-accent mb-2">10+</div>
+                        <div className="text-sm text-muted-foreground">Projects Built</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-3xl font-bold text-tertiary mb-2">15+</div>
+                        <div className="text-sm text-muted-foreground">Technologies</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-3xl font-bold text-primary mb-2">100%</div>
+                        <div className="text-sm text-muted-foreground">Commitment</div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
               </div>
             </div>
           </div>

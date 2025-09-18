@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Code, Mail, Github, Linkedin } from "lucide-react";
+import { ThemeToggle } from "./theme-toggle";
+import { personalInfo } from "@/data/portfolio-data";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,30 +16,24 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navItems = [
-    { href: "#about", label: "About" },
-    { href: "#experience", label: "Experience" },
-    { href: "#skills", label: "Skills" },
-    { href: "#projects", label: "Projects" },
-    { href: "#contact", label: "Contact" },
-  ];
+  const navItems = personalInfo.navigation;
 
   return (
     <header
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+      className={`fixed top-0 w-full z-50 transition-all duration-500 ${
         isScrolled
-          ? "bg-background/80 backdrop-blur-lg border-b border-border/50 shadow-sm"
+          ? "bg-background/90 backdrop-blur-xl border-b border-border/50 shadow-lg"
           : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-4">
         <nav className="flex items-center justify-between h-16">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2 font-bold text-xl">
-            <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
+          <a href="#" className="flex items-center gap-2 font-bold text-xl hover-scale">
+            <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center shadow-lg">
               <Code className="w-5 h-5 text-white" />
             </div>
-            Ansh Ahuja
+            {personalInfo.name}
           </a>
 
           {/* Desktop Navigation */}
@@ -56,22 +52,23 @@ const Header = () => {
           {/* Social Links & CTA */}
           <div className="hidden md:flex items-center gap-4">
             <a
-              href="https://github.com"
+              href={personalInfo.social.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 text-muted-foreground hover:text-primary transition-colors duration-200"
+              className="p-2 text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-110"
             >
               <Github className="w-5 h-5" />
             </a>
             <a
-              href="https://linkedin.com"
+              href={personalInfo.social.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 text-muted-foreground hover:text-primary transition-colors duration-200"
+              className="p-2 text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-110"
             >
               <Linkedin className="w-5 h-5" />
             </a>
-            <Button variant="default" size="sm" asChild>
+            <ThemeToggle />
+            <Button variant="default" size="sm" asChild className="btn-magnetic">
               <a href="#contact" className="flex items-center gap-2">
                 <Mail className="w-4 h-4" />
                 Contact Me
@@ -106,21 +103,22 @@ const Header = () => {
               ))}
               <div className="flex items-center gap-4 px-4 pt-4 border-t border-border/50">
                 <a
-                  href="https://github.com"
+                  href={personalInfo.social.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 text-muted-foreground hover:text-primary transition-colors duration-200"
+                  className="p-2 text-muted-foreground hover:text-primary transition-all duration-300"
                 >
                   <Github className="w-5 h-5" />
                 </a>
                 <a
-                  href="https://linkedin.com"
+                  href={personalInfo.social.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 text-muted-foreground hover:text-primary transition-colors duration-200"
+                  className="p-2 text-muted-foreground hover:text-primary transition-all duration-300"
                 >
                   <Linkedin className="w-5 h-5" />
                 </a>
+                <ThemeToggle />
                 <Button variant="default" size="sm" asChild className="flex-1">
                   <a href="#contact" className="flex items-center justify-center gap-2">
                     <Mail className="w-4 h-4" />

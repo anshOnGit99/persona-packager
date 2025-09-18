@@ -1,122 +1,121 @@
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Building, Calendar, MapPin } from "lucide-react";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Building, Calendar, MapPin, ExternalLink } from "lucide-react";
+import { experience } from "@/data/portfolio-data";
 
 const Experience = () => {
-  const experience = {
-    company: "Tata Consultancy Services",
-    position: "Developer",
-    location: "Bengaluru | Onsite",
-    duration: "07/2022 - Present",
-    description: "Software Developer at TCS Innovation Labs, specializing in full-stack web development and data processing solutions.",
-    achievements: [
-      {
-        title: "Full-Stack Web Development",
-        description: "Designed and developed 3+ responsive web applications using Angular, HTML5, CSS3, and TypeScript. Integrated RESTful APIs for seamless backend communication and utilized Angular Material and Bootstrap for consistent UI/UX design."
-      },
-      {
-        title: "State Management & Performance Optimization", 
-        description: "Implemented NgRx and RxJS for state management, reducing page load times by 30% through lazy loading and code splitting techniques."
-      },
-      {
-        title: "Cross-Functional Collaboration",
-        description: "Partnered with backend developers, designers, and product managers to deliver user-centric solutions. Developed custom Angular directives, components, and services to enhance application functionality and maintainability."
-      },
-      {
-        title: "Quality Assurance & Testing",
-        description: "Conducted code reviews, performed unit testing using Jasmine and Karma, and participated in Agile sprint meetings to ensure high-quality software delivery."
-      },
-      {
-        title: "Data Pipeline Canvas Development",
-        description: "Built an interactive drag-and-drop canvas application for visually designing and configuring data processing pipelines. Integrated diverse filters and pre-processing components with flexible sequencing to transform raw inputs into algorithm-ready datasets."
-      }
-    ],
-    technologies: [
-      "Angular", "TypeScript", "HTML5", "CSS3", "JavaScript",
-      "NgRx", "RxJS", "REST APIs", "Angular Material", "Bootstrap",
-      "Jasmine", "Karma", "Git", "Agile"
-    ]
-  };
-
   return (
     <section id="experience" className="py-20">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           {/* Section Header */}
-          <div className="text-center mb-16">
-            <Badge variant="outline" className="mb-4">Experience</Badge>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Professional 
-              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                {" "}Journey
-              </span>
+          <div className="text-center mb-16 slide-in-up">
+            <Badge variant="outline" className="mb-4 px-4 py-2">
+              <Building className="w-4 h-4 mr-2" />
+              Experience
+            </Badge>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              My Journey
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Building innovative solutions and driving digital transformation
-            </p>
+            <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full"></div>
           </div>
 
-          {/* Experience Card */}
-          <Card className="hover:shadow-lg transition-all duration-300 border-l-4 border-l-primary">
-            <CardHeader className="pb-4">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                <div>
-                  <h3 className="text-2xl font-bold">{experience.position}</h3>
-                  <div className="flex items-center gap-2 text-primary font-semibold mt-1">
-                    <Building className="w-4 h-4" />
-                    {experience.company}
-                  </div>
-                </div>
-                <div className="flex flex-col gap-2 text-sm text-muted-foreground">
-                  <div className="flex items-center gap-2">
-                    <Calendar className="w-4 h-4" />
-                    {experience.duration}
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <MapPin className="w-4 h-4" />
-                    {experience.location}
-                  </div>
-                </div>
-              </div>
-              <p className="text-muted-foreground mt-4">{experience.description}</p>
-            </CardHeader>
-
-            <CardContent className="space-y-6">
-              {/* Key Achievements */}
-              <div>
-                <h4 className="font-semibold mb-4 text-lg">Key Achievements</h4>
-                <div className="space-y-4">
-                  {experience.achievements.map((achievement, index) => (
-                    <div key={index} className="border-l-2 border-accent/30 pl-4">
-                      <h5 className="font-semibold text-foreground mb-2">{achievement.title}</h5>
-                      <p className="text-muted-foreground text-sm leading-relaxed">
-                        {achievement.description}
+          {/* Experience Timeline */}
+          <div className="relative">
+            {/* Timeline Line */}
+            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-accent to-tertiary"></div>
+            
+            <div className="space-y-12">
+              {experience.map((exp, index) => (
+                <div key={exp.id} className="slide-in-up stagger-1 relative">
+                  {/* Timeline Dot */}
+                  <div className="absolute left-6 w-4 h-4 bg-primary rounded-full border-4 border-background shadow-lg pulse-glow"></div>
+                  
+                  <Card className="ml-16 card-hover glass">
+                    <CardHeader className="pb-4">
+                      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                        <div>
+                          <h3 className="text-2xl font-bold text-primary">{exp.position}</h3>
+                          <h4 className="text-xl font-semibold text-foreground">{exp.company}</h4>
+                        </div>
+                        <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                          <div className="flex items-center gap-1">
+                            <Calendar className="w-4 h-4" />
+                            <span>{exp.duration}</span>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <MapPin className="w-4 h-4" />
+                            <span>{exp.location}</span>
+                          </div>
+                          <Badge variant="secondary">{exp.type}</Badge>
+                        </div>
+                      </div>
+                    </CardHeader>
+                    
+                    <CardContent>
+                      <p className="text-muted-foreground mb-6 text-lg leading-relaxed">
+                        {exp.description}
                       </p>
-                    </div>
-                  ))}
+                      
+                      {/* Highlights */}
+                      <div className="mb-6">
+                        <h5 className="font-semibold mb-3 text-foreground">Key Achievements:</h5>
+                        <ul className="space-y-2">
+                          {exp.highlights.map((highlight, idx) => (
+                            <li key={idx} className="flex items-start gap-2 text-muted-foreground">
+                              <div className="w-1.5 h-1.5 bg-accent rounded-full mt-2 flex-shrink-0"></div>
+                              <span>{highlight}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      
+                      {/* Technologies */}
+                      <div>
+                        <h5 className="font-semibold mb-3 text-foreground">Technologies Used:</h5>
+                        <div className="flex flex-wrap gap-2">
+                          {exp.technologies.map((tech, idx) => (
+                            <Badge 
+                              key={idx} 
+                              variant="outline" 
+                              className="bg-primary/10 border-primary/30 text-primary hover:bg-primary/20 transition-colors"
+                            >
+                              {tech}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
                 </div>
-              </div>
-
-              {/* Technologies Used */}
-              <div>
-                <h4 className="font-semibold mb-4 text-lg">Technologies & Tools</h4>
-                <div className="flex flex-wrap gap-2">
-                  {experience.technologies.map((tech) => (
-                    <Badge key={tech} variant="secondary" className="hover:bg-primary/10 transition-colors">
-                      {tech}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Timeline Indicator */}
-          <div className="mt-8 text-center">
-            <div className="inline-flex items-center gap-2 text-sm text-muted-foreground">
-              <div className="w-2 h-2 bg-primary rounded-full"></div>
-              Currently Working
+              ))}
             </div>
+          </div>
+
+          {/* Call to Action */}
+          <div className="text-center mt-16 slide-in-up">
+            <Card className="glass p-8 max-w-2xl mx-auto">
+              <div className="space-y-4">
+                <h3 className="text-2xl font-semibold">Ready for New Challenges</h3>
+                <p className="text-muted-foreground">
+                  I'm always open to discussing new opportunities and exciting projects. 
+                  Let's connect and see how we can work together!
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                  <Badge variant="outline" className="px-4 py-2">
+                    <div className="w-2 h-2 bg-success rounded-full animate-pulse mr-2"></div>
+                    Available for opportunities
+                  </Badge>
+                  <a 
+                    href="#contact" 
+                    className="inline-flex items-center gap-2 text-primary hover:text-primary-hover transition-colors"
+                  >
+                    <span>Get in touch</span>
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+                </div>
+              </div>
+            </Card>
           </div>
         </div>
       </div>
