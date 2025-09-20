@@ -1,9 +1,10 @@
-import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { 
   Mail, 
@@ -11,11 +12,13 @@ import {
   MapPin, 
   Github, 
   Linkedin, 
-  Send,
+  Send, 
   Download,
-  Calendar,
-  Clock
+  MessageCircle,
+  Clock,
+  CheckCircle
 } from "lucide-react";
+import { personalInfo } from "@/data/portfolio-data";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -25,7 +28,6 @@ const Contact = () => {
     subject: "",
     message: ""
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -37,14 +39,13 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-
+    
     // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
     toast({
       title: "Message Sent!",
-      description: "Thank you for your message. I'll get back to you soon!",
+      description: "Thank you for reaching out. I'll get back to you soon!",
     });
 
     setFormData({
@@ -53,30 +54,29 @@ const Contact = () => {
       subject: "",
       message: ""
     });
-    setIsSubmitting(false);
   };
 
   const contactInfo = [
     {
       icon: Mail,
       label: "Email",
-      value: "anshahuja3199@gmail.com",
-      href: "mailto:anshahuja3199@gmail.com",
-      description: "Primary contact"
+      value: personalInfo.email,
+      href: personalInfo.social.email,
+      description: "Drop me a line anytime"
     },
     {
       icon: Phone,
       label: "Phone",
-      value: "+91-8979314326",
-      href: "tel:+91-8979314326",
-      description: "Available 9 AM - 8 PM IST"
+      value: personalInfo.phone,
+      href: `tel:${personalInfo.phone.replace(/[^+\d]/g, '')}`,
+      description: "Let's have a conversation"
     },
     {
       icon: MapPin,
       label: "Location",
-      value: "Bengaluru, India",
-      href: "#",
-      description: "Open to remote work"
+      value: personalInfo.location,
+      href: `https://maps.google.com/?q=${encodeURIComponent(personalInfo.location)}`,
+      description: "Available for remote work"
     }
   ];
 
@@ -84,211 +84,211 @@ const Contact = () => {
     {
       icon: Github,
       label: "GitHub",
-      href: "https://github.com",
-      username: "@anshahuja"
+      value: "@anshahuja",
+      href: personalInfo.social.github,
+      description: "Check out my repositories"
     },
     {
       icon: Linkedin,
-      label: "LinkedIn",
-      href: "https://linkedin.com",
-      username: "Ansh Ahuja"
+      label: "LinkedIn", 
+      value: personalInfo.name,
+      href: personalInfo.social.linkedin,
+      description: "Let's connect professionally"
     }
   ];
 
   return (
-    <section id="contact" className="py-20 bg-muted/30">
+    <section id="contact" className="py-20 bg-gradient-to-br from-muted/30 via-background to-muted/30">
       <div className="container mx-auto px-4">
-        <div className="max-w-6xl mx-auto">
-          {/* Section Header */}
-          <div className="text-center mb-16">
-            <Badge variant="outline" className="mb-4">Contact</Badge>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Let's Work 
-              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                {" "}Together
-              </span>
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Ready to bring your ideas to life? Let's discuss your project and explore how we can collaborate.
-            </p>
-          </div>
+        <div className="text-center mb-16 animate-fade-in">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+            Get In Touch
+          </h2>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            I'm always open to discussing new opportunities, interesting projects, 
+            or just having a chat about technology and development.
+          </p>
+        </div>
 
-          <div className="grid lg:grid-cols-2 gap-12">
-            {/* Contact Form */}
-            <Card className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Send className="w-5 h-5 text-primary" />
-                  Send a Message
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label htmlFor="name" className="text-sm font-medium">
-                        Full Name *
-                      </label>
-                      <Input
-                        id="name"
-                        name="name"
-                        type="text"
-                        placeholder="Your full name"
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        required
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label htmlFor="email" className="text-sm font-medium">
-                        Email Address *
-                      </label>
-                      <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        placeholder="your.email@example.com"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        required
-                      />
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <label htmlFor="subject" className="text-sm font-medium">
-                      Subject *
-                    </label>
+        <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+          {/* Contact Form */}
+          <Card className="shadow-glow border-border/50 bg-card/50 backdrop-blur-sm animate-fade-in hover-scale">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <div className="p-2 rounded-lg bg-gradient-to-r from-primary to-accent text-white">
+                  <MessageCircle className="w-4 h-4" />
+                </div>
+                Send Message
+              </CardTitle>
+              <CardDescription>
+                Fill out the form below and I'll get back to you as soon as possible.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="space-y-2 animate-fade-in" style={{ animationDelay: '100ms' }}>
+                    <Label htmlFor="name">Name *</Label>
                     <Input
-                      id="subject"
-                      name="subject"
-                      type="text"
-                      placeholder="What's this about?"
-                      value={formData.subject}
+                      id="name"
+                      name="name"
+                      value={formData.name}
                       onChange={handleInputChange}
+                      placeholder="Your full name"
                       required
+                      className="transition-all duration-300 focus:ring-2 focus:ring-primary/30 focus:border-primary hover:border-primary/50"
                     />
                   </div>
-
-                  <div className="space-y-2">
-                    <label htmlFor="message" className="text-sm font-medium">
-                      Message *
-                    </label>
-                    <Textarea
-                      id="message"
-                      name="message"
-                      placeholder="Tell me more about your project or inquiry..."
-                      className="min-h-[120px]"
-                      value={formData.message}
+                  <div className="space-y-2 animate-fade-in" style={{ animationDelay: '150ms' }}>
+                    <Label htmlFor="email">Email *</Label>
+                    <Input
+                      id="email"
+                      name="email" 
+                      type="email"
+                      value={formData.email}
                       onChange={handleInputChange}
+                      placeholder="your.email@example.com"
                       required
+                      className="transition-all duration-300 focus:ring-2 focus:ring-primary/30 focus:border-primary hover:border-primary/50"
                     />
                   </div>
+                </div>
+                
+                <div className="space-y-2 animate-fade-in" style={{ animationDelay: '200ms' }}>
+                  <Label htmlFor="subject">Subject *</Label>
+                  <Input
+                    id="subject"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleInputChange}
+                    placeholder="What's this about?"
+                    required
+                    className="transition-all duration-300 focus:ring-2 focus:ring-primary/30 focus:border-primary hover:border-primary/50"
+                  />
+                </div>
+                
+                <div className="space-y-2 animate-fade-in" style={{ animationDelay: '250ms' }}>
+                  <Label htmlFor="message">Message *</Label>
+                  <Textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    placeholder="Tell me about your project or just say hello!"
+                    rows={5}
+                    required
+                    className="transition-all duration-300 focus:ring-2 focus:ring-primary/30 focus:border-primary hover:border-primary/50 resize-none"
+                  />
+                </div>
+                
+                <Button 
+                  type="submit" 
+                  className="w-full bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 transition-all duration-500 shadow-lg hover:shadow-glow animate-fade-in"
+                  style={{ animationDelay: '300ms' }}
+                  size="lg"
+                >
+                  <Send className="w-4 h-4 mr-2" />
+                  Send Message
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
 
-                  <Button
-                    type="submit"
-                    size="lg"
-                    className="w-full group"
-                    disabled={isSubmitting}
+          {/* Contact Information */}
+          <div className="space-y-8">
+            {/* Contact Details */}
+            <Card className="shadow-glow border-border/50 bg-card/50 backdrop-blur-sm animate-fade-in hover-scale" style={{ animationDelay: '100ms' }}>
+              <CardHeader>
+                <CardTitle>Contact Details</CardTitle>
+                <CardDescription>
+                  Here are the best ways to reach me directly.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                {contactInfo.map((info, index) => (
+                  <a 
+                    key={info.label}
+                    href={info.href}
+                    target={info.label === "Location" ? "_blank" : undefined}
+                    rel={info.label === "Location" ? "noopener noreferrer" : undefined}
+                    className="flex items-start gap-4 p-3 rounded-lg hover:bg-gradient-to-r hover:from-primary/10 hover:to-accent/10 transition-all duration-300 group animate-fade-in"
+                    style={{ animationDelay: `${200 + index * 50}ms` }}
                   >
-                    {isSubmitting ? (
-                      <>
-                        <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin mr-2" />
-                        Sending Message...
-                      </>
-                    ) : (
-                      <>
-                        <Send className="w-5 h-5 mr-2 group-hover:translate-x-1 transition-transform" />
-                        Send Message
-                      </>
-                    )}
-                  </Button>
-                </form>
+                    <div className="p-2 bg-gradient-to-r from-primary/20 to-accent/20 text-primary rounded-lg group-hover:from-primary/30 group-hover:to-accent/30 transition-all duration-300">
+                      <info.icon className="w-4 h-4" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-sm group-hover:text-primary transition-colors">{info.label}</h3>
+                      <p className="text-sm text-muted-foreground mb-1">{info.value}</p>
+                      <p className="text-xs text-muted-foreground">{info.description}</p>
+                    </div>
+                  </a>
+                ))}
               </CardContent>
             </Card>
 
-            {/* Contact Information */}
-            <div className="space-y-8">
-              {/* Contact Details */}
-              <Card>
-                <CardHeader>
-                  <CardTitle>Get In Touch</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  {contactInfo.map((item, index) => (
-                    <div key={index} className="flex items-start gap-4">
-                      <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <item.icon className="w-5 h-5 text-primary" />
-                      </div>
-                      <div className="flex-1">
-                        <h4 className="font-semibold">{item.label}</h4>
-                        <a
-                          href={item.href}
-                          className="text-muted-foreground hover:text-primary transition-colors"
-                        >
-                          {item.value}
-                        </a>
-                        <p className="text-sm text-muted-foreground mt-1">
-                          {item.description}
-                        </p>
-                      </div>
+            {/* Social Links */}
+            <Card className="shadow-glow border-border/50 bg-card/50 backdrop-blur-sm animate-fade-in hover-scale" style={{ animationDelay: '200ms' }}>
+              <CardHeader>
+                <CardTitle>Social Media</CardTitle>
+                <CardDescription>
+                  Connect with me on these platforms.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {socialLinks.map((social, index) => (
+                  <a 
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-start gap-4 p-3 rounded-lg hover:bg-gradient-to-r hover:from-primary/10 hover:to-accent/10 transition-all duration-300 group animate-fade-in"
+                    style={{ animationDelay: `${300 + index * 50}ms` }}
+                  >
+                    <div className="p-2 bg-gradient-to-r from-primary/20 to-accent/20 text-primary rounded-lg group-hover:from-primary/30 group-hover:to-accent/30 transition-all duration-300">
+                      <social.icon className="w-4 h-4" />
                     </div>
-                  ))}
-                </CardContent>
-              </Card>
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-sm group-hover:text-primary transition-colors">{social.label}</h3>
+                      <p className="text-sm text-muted-foreground mb-1">{social.value}</p>
+                      <p className="text-xs text-muted-foreground">{social.description}</p>
+                    </div>
+                  </a>
+                ))}
+              </CardContent>
+            </Card>
 
-              {/* Social Links */}
-              <Card>
-                <CardHeader>
-                  <CardTitle>Connect With Me</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {socialLinks.map((social, index) => (
-                    <a
-                      key={index}
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-4 p-3 rounded-lg hover:bg-muted/50 transition-colors group"
-                    >
-                      <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
-                        <social.icon className="w-5 h-5 text-primary group-hover:scale-110 transition-transform" />
-                      </div>
-                      <div>
-                        <h4 className="font-semibold">{social.label}</h4>
-                        <p className="text-sm text-muted-foreground">{social.username}</p>
-                      </div>
-                    </a>
-                  ))}
-                </CardContent>
-              </Card>
-
-              {/* Availability & Resume */}
-              <Card>
-                <CardContent className="p-6 space-y-4">
-                  <div className="flex items-center gap-3 mb-4">
+            {/* Availability */}
+            <Card className="shadow-glow border-success/30 bg-card/50 backdrop-blur-sm animate-fade-in hover-scale" style={{ animationDelay: '300ms' }}>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <div className="p-2 rounded-lg bg-success/20 text-success">
+                    <Clock className="w-4 h-4" />
+                  </div>
+                  Availability
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="flex items-center gap-2">
                     <div className="w-3 h-3 bg-success rounded-full animate-pulse"></div>
-                    <span className="font-semibold">Available for new opportunities</span>
+                    <Badge variant="outline" className="border-success/30 text-success bg-success/10">
+                      {personalInfo.availability}
+                    </Badge>
                   </div>
-                  
-                  <div className="space-y-3 text-sm text-muted-foreground">
-                    <div className="flex items-center gap-2">
-                      <Clock className="w-4 h-4" />
-                      Response time: Within 24 hours
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Calendar className="w-4 h-4" />
-                      Open to freelance & full-time opportunities
-                    </div>
-                  </div>
-
-                  <Button variant="outline" className="w-full group mt-4">
-                    <Download className="w-4 h-4 mr-2 group-hover:animate-bounce" />
-                    Download Resume
-                  </Button>
-                </CardContent>
-              </Card>
-            </div>
+                </div>
+                
+                <p className="text-sm text-muted-foreground mb-4">
+                  I'm currently open to new opportunities and interesting projects. 
+                  Feel free to reach out if you'd like to work together!
+                </p>
+                
+                <Button variant="outline" className="w-full hover:bg-gradient-to-r hover:from-primary hover:to-accent hover:text-white transition-all duration-500" size="sm">
+                  <Download className="w-4 h-4 mr-2" />
+                  Download Resume
+                </Button>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>
