@@ -9,7 +9,7 @@ const About = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}
-          <div className="text-center mb-16 opacity-0 animate-fade-in">
+          <div className="text-center mb-16 animate-fade-in">
             <Badge variant="outline" className="mb-4 px-4 py-2">
               <User className="w-4 h-4 mr-2" />
               About Me
@@ -22,7 +22,7 @@ const About = () => {
 
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             {/* Personal Info */}
-            <div className="opacity-0 animate-slide-in-left" style={{ animationDelay: '200ms' }}>
+            <div className="animate-slide-in-left" style={{ animationDelay: '200ms' }}>
               <Card className="card-hover glass">
                 <CardContent className="p-8">
                   <h3 className="text-2xl font-semibold mb-6 flex items-center gap-2">
@@ -58,7 +58,7 @@ const About = () => {
             </div>
 
             {/* Achievements & Stats */}
-            <div className="opacity-0 animate-slide-in-right" style={{ animationDelay: '400ms' }}>
+            <div className="animate-slide-in-right" style={{ animationDelay: '400ms' }}>
               <div className="space-y-6">
                 <Card className="card-hover glass">
                   <CardContent className="p-8">
