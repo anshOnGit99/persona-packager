@@ -20,7 +20,7 @@ const Hero = () => {
           <div className="slide-in-up opacity-0 animate-fade-in">
             <Badge 
               variant="outline" 
-              className="mb-6 px-4 py-2 text-sm bg-background/50 backdrop-blur border-primary/30 hover:border-primary/50 transition-all duration-300"
+              className="mb-6 px-4 py-2 text-sm bg-background/80 backdrop-blur border-primary/30 hover:border-primary/50 transition-all duration-300 text-foreground"
             >
               <div className="w-2 h-2 bg-success rounded-full animate-pulse mr-2"></div>
               {personalInfo.availability}
@@ -74,7 +74,7 @@ const Hero = () => {
               href={personalInfo.social.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-4 rounded-full bg-background/10 backdrop-blur border border-white/10 text-muted-foreground hover:text-primary hover:bg-primary/10 hover:border-primary/30 transition-all duration-300 hover:scale-110 hover:shadow-glow"
+              className="p-4 rounded-full bg-background/30 backdrop-blur border border-border/20 text-foreground hover:text-primary hover:bg-primary/10 hover:border-primary/30 transition-all duration-300 hover:scale-110 hover:shadow-glow"
             >
               <Github className="w-6 h-6" />
             </a>
@@ -82,13 +82,13 @@ const Hero = () => {
               href={personalInfo.social.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-4 rounded-full bg-background/10 backdrop-blur border border-white/10 text-muted-foreground hover:text-primary hover:bg-primary/10 hover:border-primary/30 transition-all duration-300 hover:scale-110 hover:shadow-glow"
+              className="p-4 rounded-full bg-background/30 backdrop-blur border border-border/20 text-foreground hover:text-primary hover:bg-primary/10 hover:border-primary/30 transition-all duration-300 hover:scale-110 hover:shadow-glow"
             >
               <Linkedin className="w-6 h-6" />
             </a>
             <a
               href={personalInfo.social.email}
-              className="p-4 rounded-full bg-background/10 backdrop-blur border border-white/10 text-muted-foreground hover:text-primary hover:bg-primary/10 hover:border-primary/30 transition-all duration-300 hover:scale-110 hover:shadow-glow"
+              className="p-4 rounded-full bg-background/30 backdrop-blur border border-border/20 text-foreground hover:text-primary hover:bg-primary/10 hover:border-primary/30 transition-all duration-300 hover:scale-110 hover:shadow-glow"
             >
               <Mail className="w-6 h-6" />
             </a>
