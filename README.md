@@ -1,22 +1,20 @@
-# Welcome to your Lovable project
+# Portfolio Website
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/98be34c6-c2aa-4c29-a72e-c7b9e4f0ab83
+This is a modern React portfolio website built with cutting-edge web technologies.
 
 ## How can I edit this code?
 
 There are several ways of editing your application.
 
-**Use Lovable**
+**Live Development**
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/98be34c6-c2aa-4c29-a72e-c7b9e4f0ab83) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
+This project supports live development with automatic updates and hot reloading.
 
 **Use your preferred IDE**
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+You can clone this repo and work locally using your preferred IDE.
 
 The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
@@ -62,12 +60,8 @@ This project is built with:
 
 ## How can I deploy this project?
 
-Simply open [Lovable](https://lovable.dev/projects/98be34c6-c2aa-4c29-a72e-c7b9e4f0ab83) and click on Share -> Publish.
+Deploy using your preferred hosting platform (Vercel, Netlify, GitHub Pages, etc.).
 
-## Can I connect a custom domain to my Lovable project?
+## Can I connect a custom domain?
 
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Yes! You can connect your own custom domain through your hosting platform's domain settings.
