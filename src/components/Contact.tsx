@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Label } from "@/components/ui/label";  
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
+import emailjs from '@emailjs/browser';
+import { emailjsConfig } from "@/lib/emailjs-config";
 import { 
   Mail, 
   Phone, 
@@ -16,7 +18,8 @@ import {
   Download,
   MessageCircle,
   Clock,
-  CheckCircle
+  CheckCircle,
+  MessageSquare
 } from "lucide-react";
 import { personalInfo } from "@/data/portfolio-data";
 
@@ -28,6 +31,7 @@ const Contact = () => {
     subject: "",
     message: ""
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -39,21 +43,50 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
     
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    try {
+      // Send email using EmailJS
+      await emailjs.send(
+        emailjsConfig.serviceId,
+        emailjsConfig.templateId,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          to_email: personalInfo.email,
+        },
+        emailjsConfig.publicKey
+      );
 
-    toast({
-      title: "Message Sent!",
-      description: "Thank you for reaching out. I'll get back to you soon!",
-    });
+      toast({
+        title: "Message Sent Successfully!",
+        description: "Thank you for reaching out. I'll get back to you within 24 hours!",
+      });
 
-    setFormData({
-      name: "",
-      email: "",
-      subject: "",
-      message: ""
-    });
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: ""
+      });
+    } catch (error) {
+      console.error('EmailJS Error:', error);
+      toast({
+        title: "Message Failed to Send",
+        description: "Please try again or contact me directly via WhatsApp.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleWhatsAppContact = () => {
+    const message = `Hi ${personalInfo.name}! I'm interested in discussing a project with you.`;
+    const whatsappUrl = `https://wa.me/${personalInfo.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
   };
 
   const contactInfo = [
@@ -181,15 +214,30 @@ const Contact = () => {
                   />
                 </div>
                 
-                <Button 
-                  type="submit" 
-                  className="w-full bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 transition-all duration-500 shadow-lg hover:shadow-glow animate-fade-in"
-                  style={{ animationDelay: '300ms' }}
-                  size="lg"
-                >
-                  <Send className="w-4 h-4 mr-2" />
-                  Send Message
-                </Button>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <Button 
+                    type="submit" 
+                    disabled={isSubmitting}
+                    className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 transition-all duration-500 shadow-lg hover:shadow-glow animate-fade-in disabled:opacity-50"
+                    style={{ animationDelay: '300ms' }}
+                    size="lg"
+                  >
+                    <Send className="w-4 h-4 mr-2" />
+                    {isSubmitting ? "Sending..." : "Send Message"}
+                  </Button>
+                  
+                  <Button 
+                    type="button"
+                    onClick={handleWhatsAppContact}
+                    variant="outline"
+                    className="bg-success/10 hover:bg-success hover:text-white border-success/30 hover:border-success transition-all duration-500 animate-fade-in"
+                    style={{ animationDelay: '350ms' }}
+                    size="lg"
+                  >
+                    <MessageSquare className="w-4 h-4 mr-2" />
+                    WhatsApp
+                  </Button>
+                </div>
               </form>
             </CardContent>
           </Card>
