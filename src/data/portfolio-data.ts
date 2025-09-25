@@ -11,8 +11,8 @@ export const personalInfo = {
   availability: "Available for opportunities",
   
   social: {
-    github: "https://github.com/anshahuja",
-    linkedin: "https://linkedin.com/in/anshahuja",
+    github: "https://github.com/anshOnGit99",
+    linkedin: "https://linkedin.com/in/ansh-ahuja99",
     email: "mailto:anshahuja3199@gmail.com"
   },
 
@@ -117,7 +117,7 @@ export const projects = [
       "Order tracking and management",
       "Admin dashboard with analytics"
     ],
-    github: "https://github.com/anshahuja/ecommerce-platform",
+    github: "https://github.com/anshOnGit99/ecommerce-platform",
     live: "https://ecommerce-demo.com",
     status: "Completed",
     category: "Full-Stack"
@@ -137,7 +137,7 @@ export const projects = [
       "Team member management",
       "Mobile responsive design"
     ],
-    github: "https://github.com/anshahuja/task-manager",
+    github: "https://github.com/anshOnGit99/task-manager",
     live: "https://taskmanager-demo.com",
     status: "In Progress",
     category: "Frontend"
@@ -157,7 +157,7 @@ export const projects = [
       "Weather alerts and notifications",
       "Offline data caching"
     ],
-    github: "https://github.com/anshahuja/weather-app",
+    github: "https://github.com/anshOnGit99/weather-app",
     live: "https://weather-demo.com",
     status: "Completed", 
     category: "Mobile"

@@ -36,7 +36,7 @@ const Projects = () => {
     <section id="projects" className="py-20 bg-gradient-to-br from-background via-muted/30 to-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl font-bold pb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent leading-none">
             Featured Projects
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -149,7 +149,7 @@ const Projects = () => {
             className="hover:bg-gradient-to-r hover:from-primary hover:to-accent hover:text-white transition-all duration-500 hover-scale" 
             asChild
           >
-            <a href="https://github.com/anshahuja" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/anshOnGit99" target="_blank" rel="noopener noreferrer">
               <Github className="w-5 h-5 mr-2" />
               View All Projects on GitHub
             </a>

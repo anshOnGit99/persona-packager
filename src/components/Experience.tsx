@@ -14,7 +14,7 @@ const Experience = () => {
               <Building className="w-4 h-4 mr-2" />
               Experience
             </Badge>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+            <h2 className="text-4xl md:text-5xl font-bold pb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent leading-none">
               My Journey
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full"></div>
